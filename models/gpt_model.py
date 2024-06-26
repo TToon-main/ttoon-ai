@@ -2,10 +2,9 @@ from openai import OpenAI
 import configs
 
 class Prompt():
-    def __init__(self, model, story) -> None:
+    def __init__(self, model) -> None:
         self.model = configs.GPT_MODEL
-        self.story = story
-
+        
         self.message = [
         {
             "role" : "system",
@@ -39,15 +38,16 @@ class Prompt():
 
     def set_model(self):
         response = openai.chat.completions.create(
-            model=self.model,
+            model = self.model,
             messages = self.message
             )
 
         answer = response.choices[0].message.content
         return answer
 
-    def generate(self):
+    def generate(self, story):
         assistant = self.set_model()
+        story = self, story
         self.message.append(
             {
                 "role": "user",
@@ -55,7 +55,7 @@ class Prompt():
             }
         )
         response = openai.chat.completions.create(
-            model=self.model,
+            model = self.model,
             messages = self.message
             )
 
