@@ -24,8 +24,7 @@ if __name__ == "__main__":
     print(answer)
     prompts = preprocess.gpt_preprocess.prompt_preprocess(answer)
     print("prompts = ")
-    print(prompts)  
-    gpt.generate_prompt(story)
+    print(prompts) 
     
 # def register_router(flask_app: Flask):
 #     from router.auths.auths_router import auths_router
