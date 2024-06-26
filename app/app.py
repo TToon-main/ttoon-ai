@@ -1,4 +1,6 @@
 from flask import Flask
+import sys, os
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from models import sd_model, gpt_model
 from preprocess import gpt_preprocess
 from configs import gpt_config
