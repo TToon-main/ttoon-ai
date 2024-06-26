@@ -1,3 +1,5 @@
+import random
+
 CHECKPOINTS = [ 
     'stablediffusionapi/flat-2d-animerge', 
     # 'frankjoshua/toonyou_beta6', 
@@ -18,6 +20,6 @@ SAVE_DIR = "ttoon-ai/result"
 
 TEST_IMAGE_TITLE = "TEST_IMAGE"
 
-# seed = random.randint(0,1024)
+seed = random.randint(0,1024)
 
-# print(seed)
+print(seed)
