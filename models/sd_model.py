@@ -1,4 +1,4 @@
-import configs.pipeline_config
+from configs import pipeline_config
 import embeddings
 from diffusers import StableDiffusionPipeline,DPMSolverSinglestepScheduler
 import transformers
@@ -10,35 +10,35 @@ warnings.filterwarnings('ignore')
 def generate_model():
     clip_skip = 2
     text_encoder = transformers.CLIPTextModel.from_pretrained(
-        configs.pipeline_config.CHECKPOINTS[0],
+        pipeline_config.CHECKPOINTS[0],
         subfolder = "text_encoder",
         torch_dtype = torch.float16,
         num_hidden_layers = 12 - (clip_skip - 1))
 
     scheduler = DPMSolverSinglestepScheduler.from_pretrained(
-        configs.pipeline_config.CHECKPOINTS[0]
+        pipeline_config.CHECKPOINTS[0]
         ,subfolder="scheduler")
 
     pipeline = StableDiffusionPipeline.from_pretrained(
-        configs.pipeline_config.CHECKPOINTS[1]
+        pipeline_config.CHECKPOINTS[1]
         ,torch_dtype = torch.float16
         ,safety_checker = None
         ,requires_safety_checker = False
         ,scheduler=scheduler
         ,text_encoder = text_encoder)
 
-    pipeline.load_textual_inversion(configs.pipeline_config.EMBEDDINGS[0])
-    pipeline.load_textual_inversion(configs.pipeline_config.EMBEDDINGS[1])
+    pipeline.load_textual_inversion(pipeline_config.EMBEDDINGS[0])
+    pipeline.load_textual_inversion(pipeline_config.EMBEDDINGS[1])
 
     pipeline.to("cuda")
 
-    generator = torch.Generator("cuda").manual_seed(configs.pipeline_config.seed)
+    generator = torch.Generator("cuda").manual_seed(pipeline_config.seed)
     
     return pipeline, generator
 
 def generate_image(pipeline, generator, prompt):
-    image = pipeline(prompt + configs.pipeline_config.FIXED_PROMPT,
-                    negative_prompt = configs.pipeline_config.NEGATIVE_PROMPT,
+    image = pipeline(prompt + pipeline_config.FIXED_PROMPT,
+                    negative_prompt = pipeline_config.NEGATIVE_PROMPT,
                     generator = generator,
                     num_inference_steps = 23,
                     guidance_scale = 8,
