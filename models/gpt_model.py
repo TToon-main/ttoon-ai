@@ -48,7 +48,7 @@ class Prompt():
         answer = response.choices[0].message.content
         return answer
 
-    def generate(self, story):
+    def generate_image(self, story):
         assistant = self.set_model()
         story = self, story
         self.message.append(
