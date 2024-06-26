@@ -21,7 +21,7 @@ def generate_model():
         ,subfolder="scheduler")
 
     pipeline = StableDiffusionPipeline.from_pretrained(
-        pipeline_config.CHECKPOINTS[1]
+        pipeline_config.CHECKPOINTS[0]
         ,torch_dtype = torch.float16
         ,safety_checker = None
         ,requires_safety_checker = False
