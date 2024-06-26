@@ -1,4 +1,8 @@
 from flask import Flask
+import models
+import models.flat_2d_animerge 
+
+pipeline, generator = models.flat_2d_animerge.generate_model()
 
 app = Flask(__name__)
 
