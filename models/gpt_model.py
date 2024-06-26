@@ -1,4 +1,4 @@
-from openai import OpenAI
+import openai
 import sys, os
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from configs import gpt_config
@@ -49,7 +49,7 @@ class Prompt():
         answer = response.choices[0].message.content
         return answer
 
-    def generate_image(self, story):
+    def generate_prompt(self, story):
         assistant = self.set_model()
         story = self, story
         self.message.append(

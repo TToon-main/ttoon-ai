@@ -13,7 +13,7 @@ def generate_model():
     text_encoder = transformers.CLIPTextModel.from_pretrained(
         pipeline_config.CHECKPOINTS[0],
         subfolder = "text_encoder",
-        torch_dtype = torch.float16,
+        # torch_dtype = torch.float16,
         num_hidden_layers = 12 - (clip_skip - 1))
 
     scheduler = DPMSolverSinglestepScheduler.from_pretrained(
@@ -22,7 +22,7 @@ def generate_model():
 
     pipeline = StableDiffusionPipeline.from_pretrained(
         pipeline_config.CHECKPOINTS[0]
-        ,torch_dtype = torch.float16
+        # ,torch_dtype = torch.float16
         ,safety_checker = None
         ,requires_safety_checker = False
         ,scheduler=scheduler
@@ -31,9 +31,9 @@ def generate_model():
     pipeline.load_textual_inversion(pipeline_config.EMBEDDINGS[0])
     pipeline.load_textual_inversion(pipeline_config.EMBEDDINGS[1])
 
-    pipeline.to("cuda")
+    pipeline.to("cpu")
 
-    generator = torch.Generator("cuda").manual_seed(pipeline_config.seed)
+    generator = torch.Generator("cpu").manual_seed(pipeline_config.seed)
     
     return pipeline, generator
 
