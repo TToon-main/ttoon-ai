@@ -51,11 +51,10 @@ class Prompt():
 
     def generate_prompt(self, story):
         assistant = self.set_model()
-        story = self, story
         self.message.append(
             {
                 "role": "user",
-                "content": self.story
+                "content": story
             }
         )
         response = openai.chat.completions.create(
