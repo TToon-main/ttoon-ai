@@ -8,8 +8,8 @@ CHECKPOINTS = [
     ]
 
 EMBEDDINGS = [
-    'ttoon-ai/config/badhandv4.pt',
-    'ttoon-ai/config/EasyNegative.pt'
+    '/Users/jaehunchoi/Desktop/JAE/HONGIK/졸업프로젝트/ttoon-ai/embeddings/badhandv4.pt',
+    '/Users/jaehunchoi/Desktop/JAE/HONGIK/졸업프로젝트/ttoon-ai/embeddings/EasyNegative.pt'
     ]
 
 FIXED_PROMPT = ",((Best quality,Extremely detailed,Masterpiece)),(facial expression),(different hair color and style of Characters:1.7),(((All Characters exist in image)))"
