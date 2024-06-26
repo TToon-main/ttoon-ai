@@ -1,15 +1,32 @@
 from flask import Flask
 import models.flat_2d_animerge 
 import models.gpt_model
+import preprocess.gpt_preprocess
+import configs.gpt_config
 
 pipeline, generator = models.flat_2d_animerge.generate_model()
-gpt = models.gpt_model.Prompt()
+gpt = models.gpt_model.Prompt(configs.gpt_config.GPT_MODEL)
+story = "주인공:(재훈: 검정 머리, 검정색 티셔츠를 입은 20살 남자)\n등장인물:(친구들: 한국인 남자 3명)\n이야기: 오늘은 미국 여행을 가는 날이다. 새벽 4시였지만 너무 설레는 마음으로 인천공항으로 향했다. 이번 여행은 혼자가지 않고 친구 3명과 함께 갔다. 우리는 11시간이라는 긴 비행 끝에 미국 Phoenix Sky Harbor International Airport에 도착하였다. 호텔에 가서 짐을 놓고 우리는 바로 The Grand Canyon을 보러 출발하였다. 역시 The Grand Canyon은 정말 웅장했다. 우리는 더운 와중에도 The Grand Canyon을 배경으로 사진을 엄청 많이 찍었다. 그리고 우리는 저녁을 먹으러 갔다. 저녁으로는 피자에 맥주를 마셨다. 더위가 싹 다 사라지는 기분이이였다."
 
 app = Flask(__name__)
 
 if __name__ == "__main__":
-    app.run(host = "0.0.0.0", port = "8080")    
+    app.run(host = "0.0.0.0", port = "8080")  
+    
+    protagonist, characters, story = preprocess.gpt_preprocess.input_preprocess(story)
+    
+    inputStory = protagonist + ',' + characters + '\n' + story
+    print("inputStory = ")
+    print(inputStory)
 
+    answer = gpt.generate(inputStory)
+    print("answer = ")
+    print(answer)
+    prompts = preprocess.gpt_preprocess.prompt_preprocess(answer)
+    print("prompts = ")
+    print(prompts)  
+    gpt.generate_prompt(story)
+    
 # def register_router(flask_app: Flask):
 #     from router.auths.auths_router import auths_router
 
