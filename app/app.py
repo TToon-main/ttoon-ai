@@ -1,8 +1,9 @@
 from flask import Flask
-import models
 import models.flat_2d_animerge 
+import models.gpt_model
 
 pipeline, generator = models.flat_2d_animerge.generate_model()
+gpt = models.gpt_model.Prompt()
 
 app = Flask(__name__)
 
