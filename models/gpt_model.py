@@ -1,38 +1,41 @@
 from openai import OpenAI
-import configs
+import configs.gpt_config
+
 
 class Prompt():
     def __init__(self, model) -> None:
-        self.model = configs.GPT_MODEL
+        openai.api_key = configs.gpt_config.API_KEY
+
+        self.model = configs.gpt_config.GPT_MODEL
         
         self.message = [
         {
             "role" : "system",
-            "content" : configs.SYSTEM
+            "content" : configs.gpt_config.SYSTEM
         },
         {
             "role": "user",
-            "content": configs.USER1
+            "content": configs.gpt_config.USER1
         },
         {
                 "role": "assistant",
-                "content": configs.ASSISTANT1
+                "content": configs.gpt_config.ASSISTANT1
         },
         {
             "role": "user",
-            "content": configs.USER2
+            "content": configs.gpt_config.USER2
         },
         {
                 "role": "assistant",
-                "content":configs. ASSISTANT2
+                "content":configs.gpt_config. ASSISTANT2
         },
         {
             "role": "user",
-            "content": configs.USER3
+            "content": configs.gpt_config.USER3
         },
         {
                 "role": "assistant",
-                "content": configs.ASSISTANT3
+                "content": configs.gpt_config.ASSISTANT3
         }
         ]
 
