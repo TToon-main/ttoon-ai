@@ -19,7 +19,7 @@ if __name__ == "__main__":
     print("inputStory = ")
     print(inputStory)
 
-    answer = gpt.generate(inputStory)
+    answer = gpt.generate_prompt(inputStory)
     print("answer = ")
     print(answer)
     prompts = preprocess.gpt_preprocess.prompt_preprocess(answer)
