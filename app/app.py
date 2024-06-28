@@ -12,7 +12,6 @@ story = "주인공:(재훈: 검정 머리, 검정색 티셔츠를 입은 20살 �
 app = Flask(__name__)
 
 if __name__ == "__main__":
-    app.run(host = "0.0.0.0", port = "8080")  
     
     protagonist, characters, story = gpt_preprocess.input_preprocess(story)
     
@@ -27,6 +26,12 @@ if __name__ == "__main__":
     print("prompts = ")
     print(prompts) 
     
+    for i in range(len(prompts)):
+        images = sd_model.generate_image(pipeline, generator, prompts[i])
+        sd_model.save_image(images, str(i))
+    
+    app.run(host = "0.0.0.0", port = "8080")  
+
 # def register_router(flask_app: Flask):
 #     from router.auths.auths_router import auths_router
 
