@@ -1,6 +1,7 @@
 import random
 
-CHECKPOINTS = [ 
+CHECKPOINTS = [
+    'runwayml/stable-diffusion-v1-5',
     'stablediffusionapi/flat-2d-animerge', 
     # 'frankjoshua/toonyou_beta6', 
     # 'HeWhoRemixes/seekyou-alpha1-fp16', 
