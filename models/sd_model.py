@@ -5,7 +5,7 @@ from diffusers import StableDiffusionPipeline,DPMSolverSinglestepScheduler
 import transformers
 import torch
 import warnings
-# from datetime import datetime
+from datetime import datetime
 warnings.filterwarnings('ignore')
 
 def generate_model():
@@ -50,6 +50,6 @@ def generate_image(pipeline, generator, prompt):
 
     return image
 
-# def save_image1(image, image_no):
-#         for i in range(len(image)):
-#             image[i].save(SAVE_DIR[1]+datetime.today().strftime("%Y%m%d")+'-'+TEST_IMAGE_TITLE+image_no+f'-{i}'+'.png')
+def save_image(image, image_no):
+        for i in range(len(image)):
+            image[i].save(pipeline_config.SAVE_DIR+datetime.today().strftime("%Y%m%d")+'-'+pipeline_config.TEST_IMAGE_TITLE+image_no+f'-{i}'+'.png')
