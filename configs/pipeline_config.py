@@ -16,7 +16,7 @@ FIXED_PROMPT = ",((Best quality,Extremely detailed,Masterpiece)),(facial express
 
 NEGATIVE_PROMPT = "easynegative,badhandv4,(((same character))),poorly drawn hands, poorly drawn feet, poorly drawn face, out of frame, extra limbs, body out of frame, bad anatomy, watermark, signature, cut off, low contrast, overexposed, bad art, distorted face,text,((extra hand)),((extra arm)),NSFW"
 
-SAVE_DIR = "ttoon-ai/result"
+SAVE_DIR = "/Users/jaehunchoi/Desktop/JAE/HONGIK/졸업프로젝트/ttoon-ai/test_outputs/"
 
 TEST_IMAGE_TITLE = "TEST_IMAGE"
 
