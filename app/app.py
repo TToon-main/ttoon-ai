@@ -5,9 +5,7 @@ from models import sd_model, gpt_model
 from preprocess import gpt_preprocess
 from configs import gpt_config
 
-pipeline, generator = sd_model.generate_model()
-gpt = gpt_model.Prompt(gpt_config.GPT_MODEL)
-story = "주인공:(재훈: 검정 머리, 검정색 티셔츠를 입은 20살 남자)\n등장인물:(친구들: 한국인 남자 3명)\n이야기: 오늘은 미국 여행을 가는 날이다. 새벽 4시였지만 너무 설레는 마음으로 인천공항으로 향했다. 이번 여행은 혼자가지 않고 친구 3명과 함께 갔다. 우리는 11시간이라는 긴 비행 끝에 미국 Phoenix Sky Harbor International Airport에 도착하였다. 호텔에 가서 짐을 놓고 우리는 바로 The Grand Canyon을 보러 출발하였다. 역시 The Grand Canyon은 정말 웅장했다. 우리는 더운 와중에도 The Grand Canyon을 배경으로 사진을 엄청 많이 찍었다. 그리고 우리는 저녁을 먹으러 갔다. 저녁으로는 피자에 맥주를 마셨다. 더위가 싹 다 사라지는 기분이이였다."
+story = "주인공:(혜원: 검정 긴머리, 흰색 반팔 티셔츠에 빨간색 가디건을 입은 20살 여자)\n등장인물:(친구들: 한국인 여자 3명))\n이야기: 오늘은 오랜만에 학과 동기들과 컨퍼런스를 들으러 가는 날이었다. 오전에 동기 3명과 만나서 서울 코엑스의 전시홀로 향했다. 오전 세션을 듣고, 점심을 먹으러 피자 맛집을 갔는데 정말 맛있었다. 그러고 여러가지 부스를 돌아다니며 게임과 이벤트에 참여했다. 그러고 나머지 저녁세션을 듣고, 집을 갔다. 집에 갈 때 퇴근시간이어서 지하철에 사람이 정말 많아서 힘들었다. 2시간동안 지하철 속 많은 사람들에 껴서 집으로 왔다. 그래도 알찬 하루였다."
 
 app = Flask(__name__)
 
@@ -18,33 +16,16 @@ if __name__ == "__main__":
     inputStory = protagonist + ',' + characters + '\n' + story
     print("inputStory = ")
     print(inputStory)
-
+    
+    gpt = gpt_model.Prompt()
     answer = gpt.generate_prompt(inputStory)
     print("answer = ")
     print(answer)
+    
     prompts = gpt_preprocess.prompt_preprocess(answer)
     print("prompts = ")
     print(prompts) 
     
     for i in range(len(prompts)):
-        images = sd_model.generate_image(pipeline, generator, prompts[i])
+        images = sd_model.generate_image(prompts[i])
         sd_model.save_image(images, str(i))
-    
-    app.run(host = "0.0.0.0", port = "8080")  
-
-# def register_router(flask_app: Flask):
-#     from router.auths.auths_router import auths_router
-
-#     from router.diary.diary_router import diary_router
-#     from router.stats.stats_router import report_router
-
-#     flask_app.register_blueprint(auths_router)
-#     flask_app.register_blueprint(diary_router)
-#     flask_app.register_blueprint(report_router)
-
-
-# def create_app():
-#     app = Flask(__name__)
-#     register_router(app)
-
-#     return app

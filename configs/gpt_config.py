@@ -32,7 +32,7 @@ panel 항목들의 설명을 위해 panel의 format 예시를 보여줄게.
 'panel의 format 예시'에서는 (JaeHoon is drinking coffee with 3 friends and waiting for a flight to Vietnam.)가 Situation 항목이야.
 여기서, 너가 창작하여 만들어 내는 것이 아니고, inputStory의 내용이 최대한 보존하면서 분위기와 느낌을 추가해서 작성해줘.
 또, 대명사나 1인칭 표현의 사용은 최대한 자제하고, situation에 등장하는 인물과 5번 항목인 Characters에 등장하는 인물을 동일해야해.
-그리고, inputStory에서의 ‘my’는 주인공이름’s로, ‘I’와 ‘me’는 주인공 이름으로 바꾸어 작성하고, 모든 panel의 situation은 최대 75 의미토큰으로 작성해줘.
+그리고, inputStory에서의 ‘my’는 주인공이름’s로, ‘I’와 ‘me’는 주인공 이름으로 바꾸어 작성하고, 모든 panel의 situation은 최대 42 의미토큰으로 작성해줘.
 
 2번쨰 항목은 Characteristics로, 주인공에 대한 특징을 설명하는 항목이야.
 'panel의 format 예시'에서는 (JaeHoon: a 20's boy with black hair)가 characteristics 항목이야.
@@ -83,8 +83,9 @@ inputStory를 4개의 panel로 나눌 때 사용되는 함수로, 고려할 사�
 
 3. 각 panel의 항목들은 ,로 연결되어 있어.
 4. 각 panel의 제목과 항목 내용들은 모두 영어로 출력해줘.
-5. panel 제목과 situation 사이에는 줄바꿈 1번만 해줘.
+5. panel 제목과 situation 사이에는 줄바꿈은 없어. 꼭 panel 제목과 situation는 띄어져 있으면 안돼.
 6. 각 panel 사이에는 줄바꿈을 2번 해줘.
+7. 모든 panel의 situation은 최대 42 의미토큰으로 작성해줘.
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 입력이 주어지면, 위의 고려 사항 및 panel 항목들을 참고하여 정의한 ‘나누기’ 함수를 사용하여 inputStory를 4개의 panel로 나눠줘.
 입력은 주인공, inputStory에 등장하는 인물의 정보, inputStory와 ‘나누기’로 구성되어 있어.
@@ -242,7 +243,6 @@ USER3 = """
 
 ASSISTANT3 = """
 <Panel 1: The Beginning of the Trip>
-
 (JaeHoon woke up to the sound of rain and had breakfast with JaeHoon's family, eating egg and ham toast with milk, then prepared to leave the house around noon.)
 ,(JaeHoon: a 20's boy with black hair wearing black t-shirts)
 ,(Time: Morning)
@@ -252,7 +252,6 @@ ASSISTANT3 = """
 ,(JaeHoon’s family members are his mother, father, and older brother)
 
 <Panel 2: Heading to the Airport>
-
 (JaeHoon was worried about the rain, but it turned sunny and perfect by the time he left home. JaeHoon's father drove JaeHoon to the airport.)
 ,(JaeHoon: a 20's boy with black hair wearing black t-shirts)
 ,(Time: Afternoon, Sunny)
@@ -261,7 +260,6 @@ ASSISTANT3 = """
 ,(2 Characters)
 
 <Panel 3: Waiting for the Flight>
-
 (JaeHoon met 3 Korean friends at Incheon Airport at 1PM. They checked in their luggage, completed the departure procedures, and went to Starbucks inside the airport to do some research for their trip.)
 ,(JaeHoon: a 20's boy with black hair wearing black t-shirts)
 ,(Time: Afternoon)
@@ -270,7 +268,6 @@ ASSISTANT3 = """
 ,(4 Characters)
 
 <Panel 4: Night Market in Vietnam>
-
 (In Vietnam, the weather was very hot and humid. For dinner, they had pho, then enjoyed the night market with a beer, embracing the lively atmosphere.)
 ,(JaeHoon: a 20's boy with black hair wearing black t-shirts)
 ,(Time: Night)
