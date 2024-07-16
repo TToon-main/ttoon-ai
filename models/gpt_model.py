@@ -4,7 +4,7 @@ sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from configs import gpt_config
 
 class Prompt():
-    def __init__(self, model) -> None:
+    def __init__(self) -> None:
         openai.api_key = gpt_config.API_KEY
 
         self.model = gpt_config.GPT_MODEL
@@ -40,17 +40,7 @@ class Prompt():
         }
         ]
 
-    def set_model(self):
-        response = openai.chat.completions.create(
-            model = self.model,
-            messages = self.message
-            )
-
-        answer = response.choices[0].message.content
-        return answer
-
     def generate_prompt(self, story):
-        assistant = self.set_model()
         self.message.append(
             {
                 "role": "user",
