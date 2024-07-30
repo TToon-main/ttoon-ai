@@ -1,5 +1,6 @@
 import sys, os
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
+ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.append(ROOT_DIR)
 from configs import pipeline_config
 from diffusers import AutoencoderKL, UNet2DConditionModel, StableDiffusionPipeline,DPMSolverSinglestepScheduler
 import transformers
@@ -44,9 +45,9 @@ def generate_image(prompt):
     pipeline.load_textual_inversion(pipeline_config.EMBEDDINGS[0])
     pipeline.load_textual_inversion(pipeline_config.EMBEDDINGS[1])
 
-    pipeline.to("cpu")
+    pipeline.to("cuda")
 
-    generator = torch.Generator("cpu").manual_seed(pipeline_config.seed)
+    generator = torch.Generator("cuda").manual_seed(pipeline_config.seed)
     
     image = pipeline(prompt + pipeline_config.FIXED_PROMPT,
                     negative_prompt = pipeline_config.NEGATIVE_PROMPT,
@@ -60,6 +61,6 @@ def generate_image(prompt):
 
     return image
 
-def save_image(image, image_no):
-        for i in range(len(image)):
-            image[i].save(pipeline_config.SAVE_DIR+datetime.today().strftime("%Y%m%d")+'-'+pipeline_config.TEST_IMAGE_TITLE+image_no+f'-{i}'+'.png')
+# def save_image(image, image_no):
+#         for i in range(len(image)):
+#             image[i].save(pipeline_config.SAVE_DIR+datetime.today().strftime("%Y%m%d")+'-'+image_no+f'-{i}'+'.png')
